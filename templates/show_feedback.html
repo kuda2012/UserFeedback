@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% block title %}Register{% endblock %} {%block
+content%}
+
+<h1 class="display-1">Feedback</h1>
+
+<h5>{{feedback.title}}</h5>
+
+<p>{{feedback.content}}</p>
+
+<button><a href="/users/{{feedback.username}}">Back</a></button>
+<button><a href="/feedback/{{feedback.id}}/update">Edit Feedback</a></button>
+<form
+  style="display: inline;"
+  action="/feedback/{{feedback.id}}/delete"
+  method="POST"
+>
+  <button class="text-primary">Delete Feedback</button>
+</form>
+{%endblock%}
