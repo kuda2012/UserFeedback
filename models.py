@@ -23,23 +23,22 @@ class User(db.Model):
     password = db.Column(db.Text, nullable=False)
     email = db.Column(db.String(50), unique=True)
     first_name = db.Column(db.String(30), nullable=False)
-    last_name = db.Column(db.String(30), nullable = False)
+    last_name = db.Column(db.String(30), nullable=False)
     feedback = db.relationship("Feedback", backref="user",
-                            cascade="all, delete-orphan")
-    
-    @classmethod
+                               cascade="all, delete-orphan")
 
+    @classmethod
     def register(cls, username, password):
         """Created a hashed password for potential new user"""
 
         hashed = bcrypt.generate_password_hash(password)
-        
+
         hashed_utf8 = hashed.decode("utf8")
 
-        return cls(username = username, password = hashed_utf8)
-        
+        return cls(username=username, password=hashed_utf8)
 
     # # start_authenticate
+
     @classmethod
     def authenticate(cls, username, pwd):
         """Validate that user exists & password is correct.
@@ -55,6 +54,8 @@ class User(db.Model):
         else:
             return False
     # end_authenticate
+
+
 class Feedback(db.Model):
     """Establish columns, set parameters for columns, and create table for feedback in database"""
     __tablename__ = "feedback"
