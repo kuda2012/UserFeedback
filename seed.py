@@ -12,11 +12,11 @@ User.query.delete()
 Feedback.query.delete()
 
 # Add User
-kuda_username_password = User.register("kuda2012", 'password')
-sydnee_username_password = User.register("sydnee", 'password')
-kuda = User(first_name="Kuda", last_name="Mwakutuya", email='kuda2012@gmail.com',
+kuda_username_password = User.register("user1", 'password')
+sydnee_username_password = User.register("user2", 'password')
+kuda = User(first_name="Kuda", last_name="Mwakutuya", email='email1@gmail.com',
             username="kuda2012", password=kuda_username_password.password)
-sydnee = User(first_name="Sydnee", last_name="Mwakutuya", email='sydnee@gmail.com',
+sydnee = User(first_name="Sydnee", last_name="Mwakutuya", email='email2@gmail.com',
               username="sydnee", password=sydnee_username_password.password)
 # Add new objects to session, so they'll persist
 db.session.add_all([kuda, sydnee])
