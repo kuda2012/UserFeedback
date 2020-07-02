@@ -6,14 +6,15 @@ from models import connect_db, db, User, Feedback
 from forms import UserForm, LoginForm, FeedbackForm
 from sqlalchemy.exc import IntegrityError
 
+import os
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgres:///feedback_db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///feedback_db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SQLALCHEMY_ECHO"] = True
-app.config["SECRET_KEY"] = "abc123"
+app.config["SECRET_KEY"] = "secret1"
 app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
 connect_db(app)
-db.create_all()
+
 
 toolbar = DebugToolbarExtension(app)
 
@@ -37,8 +38,8 @@ def register_user():
         email = form.email.data
         username = form.username.data
         password = form.password.data
-        user = User.register(username, password)
-        add_user = User(username=user.username, password=user.password,
+        hashed_pw = User.register(password)
+        add_user = User(username=username, password=hashed_pw,
                         first_name=first_name, last_name=last_name, email=email)
         db.session.add(add_user)
         try:
